@@ -1,0 +1,248 @@
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fa">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>تست پلاگین انتخاب تاریخ</title>
+
+    <link type="text/css" href="styles/jquery-ui-1.8.14.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="scripts/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.ui.datepicker-cc.all.min.js"></script>
+
+
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+
+        var disabledDays = [];
+        var WeekEvenDays = [];
+        var WeekOddDays = [];
+        var MonthEvenDays = [];
+        var MonthOddDays = [];
+
+        var includeItems = [];
+        var excludeItems = [];
+        var selectedMode = "None";
+
+        //Remove Element from Array with Name
+        function removeWithName(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax = arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+        //add an element to array
+        function addtoArray(item, array) {
+            if ($.inArray(item, array) != -1) {
+
+                removeWithName(array, item);
+            } else
+                array.push(item);
+        }
+        //check mikone ke roze entekhabi bar asase noe filteremon to on roz ha hast ya na
+        function checkSelectionMode(date, arrayOfDays) {
+
+            if ($.inArray(date, arrayOfDays) != -1) {
+                addtoArray(date, includeItems);
+            } else {
+                addtoArray(date, excludeItems);
+            }
+        }
+
+        $(function () {
+            var padLeft = function (value, padding) {
+                var zeros = "0";
+                for (var i = 0; i < padding; i++) {
+
+                    zeros += "0";
+                }
+                return (zeros + value).slice(padding * -1);
+
+            };
+
+            $('#datepicker7').datepicker({
+                //regional: 'ar',
+                minDate: "2/2/1393",
+                maxDate: "10/4/1393",
+                option: {
+                    isRTL: true,
+                    gotoCurrent: true
+                },
+                onSelect: function (date, inst) {
+                    var editedDate = inst.currentDay + "/" + inst.currentMonth + "/" + inst.currentYear;
+                    addtoArray(editedDate, disabledDays);
+                    if (selectedMode == "WeekEvenDays") {
+                        checkSelectionMode(editedDate, WeekEvenDays);
+                    }
+                    if (selectedMode == "WeekOddDays") {
+                        checkSelectionMode(editedDate, WeekOddDays);
+                    }
+                    if (selectedMode == "MonthEvenDays") {
+                        checkSelectionMode(editedDate, MonthEvenDays);
+                    }
+                    if (selectedMode == "MonthOddDays") {
+                        checkSelectionMode(editedDate, MonthOddDays);
+                    }
+                    if (selectedMode == "None") {
+                        checkSelectionMode(editedDate, disabledDays);
+                    }
+                    
+                    setTimeout(function () {
+                        inst.dpDiv.find(".ui-datepicker-today a").removeClass("ui-state-highlight ui-state-active  ui-state-hover")
+                    }, 1);
+                },
+                beforeShow: function (date) {
+                    debugger;
+                },
+                beforeShowDay: function (date, inst) {
+
+
+                    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+
+                    //rooz haye zoj hafte
+                    if (date.getDay() == 6 || date.getDay() == 1 || date.getDay() == 3 || date.getDay() == 5)
+                        if ($.inArray(d + "/" + m + "/" + y, WeekEvenDays) == -1)
+                            WeekEvenDays.push(d + "/" + m + "/" + y);
+
+
+                    //rozhaye fard hafte
+                    if (date.getDay() == 2 || date.getDay() == 4 || date.getDay() == 0 || date.getDay() == 5)
+                        if ($.inArray(d + "/" + m + "/" + y, WeekOddDays) == -1)
+                            WeekOddDays.push(d + "/" + m + "/" + y);
+
+                    //rooz haye zoje mah-
+                    if (date.getDate() % 2 === 0)
+                        if ($.inArray(d + "/" + m + "/" + y, MonthEvenDays) == -1)
+                            MonthEvenDays.push(d + "/" + m + "/" + y);
+
+                    //rooze fard mah
+                    if (date.getDate() % 2 !== 0)
+                        if ($.inArray(d + "/" + m + "/" + y, MonthOddDays) == -1)
+                            MonthOddDays.push(d + "/" + m + "/" + y);
+
+
+                    //enable /disable date
+                    if ($.inArray(d + '/' + (m) + '/' + y, disabledDays) != -1) {
+
+                        return [true, 'ui-state-disabled', 'تعطیل'];
+                    } else
+
+                        return [true];
+
+
+
+                }
+            });
+
+
+            function modeChange(mode, arrayOfDays) {
+                if (includeItems.length != 0 || excludeItems.length != 0) {
+                    var msg = confirm("آیا از تغییر حالت اطمینان دارید؟ در صورت تائید روز هایی که به صورت استثنا تعریف کرده اید از بین خواهند رفت");
+                    if (msg == false) {
+                        return;
+                    }
+                }
+                disabledDays = [];
+                includeItems = [];
+                excludeItems = [];
+                selectedMode = mode;
+                disabledDays = disabledDays.concat(arrayOfDays);
+                $("#datepicker7").datepicker("refresh");
+                
+
+            }
+            $("#chbEvenDays").click(function () {
+                modeChange("WeekEvenDays", WeekEvenDays);
+
+
+            });
+            $("#chbOddDays").click(function () {
+                modeChange("WeekOddDays", WeekOddDays);
+
+            });
+            $("#chbEvenDaysInMonth").click(function () {
+                modeChange("MonthEvenDays", MonthEvenDays);
+            });
+            $("#chbOddDaysInMonth").click(function () {
+                modeChange("MonthOddDays", MonthOddDays);
+            });
+            $("#chbCustom").click(function () {
+                modeChange("None", null);
+            });
+
+            $('.ui-datepicker-today a').removeClass("ui-state-highlight ui-state-active  ui-state-hover");
+        });
+
+    </script>
+
+    <style type="text/css">
+        * {
+            font-family: Tahoma !important;
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        body {
+            background-color: #0972a5;
+            direction: rtl;
+            font-size: 80%;
+        }
+
+        p {
+            padding: 25px;
+            margin: 25px auto;
+            width: 450px;
+        }
+
+            p.ui-state-hover {
+                font-weight: normal;
+            }
+
+            p.ui-widget-header {
+                text-align: center;
+                font-weight: normal;
+            }
+
+        strong.ui-state-error {
+            display: block;
+            padding: 3px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+
+        <p class='ui-widget-content'>
+            <strong class='ui-state-error'>نمایش inline</strong><br />
+            <span id="datepicker7"></span>
+
+
+            <label for="chbEvenDays">روز های زوج هفته</label>
+            <input id="chbEvenDays" name="option" class="filter" type="radio" />
+            <label for="chbOddDays">روز های فرد هفته</label>
+            <input id="chbOddDays" name="option" class="filter" type="radio" />
+
+            <label for="chbEvenDaysInMonth">روز های زوج ماه</label>
+            <input id="chbEvenDaysInMonth" name="option" class="filter" type="radio" />
+            <label for="chbOddDaysInMonth">روز های فرد ماه</label>
+            <input id="chbOddDaysInMonth" name="option" class="filter" type="radio" />
+
+
+
+            <label for="chbCustom">هیچکدام</label>
+            <input id="chbCustom" class="filter" type="radio" />
+        </p>
+
+    </div>
+</body>
+</html>
