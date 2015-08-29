@@ -1,4 +1,4 @@
 Persian-DatePicker
 ==================
 
-jQuery UI Datepicker - with Persian , Arabic, Georgian Calendar Support - Customized Feature
+Disable Month or Week Even , Odd Days and customize selected list using jquery date picker built-in functons
