@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Persian-datepicker by saeedsalehi1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Persian-datepicker</h1>
+      <h2 class="project-tagline">jQuery UI Datepicker with bootstrap theme (Persian Shamsi, Arabic, Gregorian Calendar Support)</h2>
+      <a href="https://github.com/saeedsalehi1/Persian-DatePicker" class="btn">View on GitHub</a>
+      <a href="https://github.com/saeedsalehi1/Persian-DatePicker/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/saeedsalehi1/Persian-DatePicker/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>this is another persian calendar built over jquery ui , bootstrap </p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>usage</h2>
+
+<p><code>&lt;link type="text/css" href="persian-datepicker.css" rel="stylesheet" /&gt;</code></p>
+
+<p><code>&lt;script type="text/javascript" src="./scripts/jquery-1.6.2.min.js"&gt;&lt;/script&gt;</code></p>
+
+<p><code>&lt;script type="text/javascript" src="./scripts/persian-datepicker.js"&gt;&lt;/script&gt;</code></p>
+
+<h2>
+<a id="init" class="anchor" href="#init" aria-hidden="true"><span class="octicon octicon-link"></span></a>init</h2>
+
+<p>the paramaters are same as jquery date picker
+you can simply init calendar like this:
+<code>$('#datepicker0').datepicker();</code></p>
+
+<h3>
+<a id="نمایش-شماره-هفته" class="anchor" href="#%D9%86%D9%85%D8%A7%DB%8C%D8%B4-%D8%B4%D9%85%D8%A7%D8%B1%D9%87-%D9%87%D9%81%D8%AA%D9%87" aria-hidden="true"><span class="octicon octicon-link"></span></a>نمایش شماره هفته</h3>
+
+<pre><code> $('#datepicker1').datepicker({
+            showWeek: true
+        });
+</code></pre>
+
+<h3>
+<a id="پرکردن-فیلد-اضافی" class="anchor" href="#%D9%BE%D8%B1%DA%A9%D8%B1%D8%AF%D9%86-%D9%81%DB%8C%D9%84%D8%AF-%D8%A7%D8%B6%D8%A7%D9%81%DB%8C" aria-hidden="true"><span class="octicon octicon-link"></span></a>پرکردن فیلد اضافی</h3>
+
+<pre><code>        $("#datepicker2").datepicker({
+            dateFormat: './dd/mm/yy.html',
+            altField: '#alternate2',
+            altFormat: 'DD، d MM yy'
+        });
+</code></pre>
+
+<h3>
+<a id="نمایش-دکمه-ها" class="anchor" href="#%D9%86%D9%85%D8%A7%DB%8C%D8%B4-%D8%AF%DA%A9%D9%85%D9%87-%D9%87%D8%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>نمایش دکمه ها</h3>
+
+<pre><code>        $('#datepicker3').datepicker({
+            showButtonPanel: true
+        });
+</code></pre>
+
+<h3>
+<a id="تغییر-قالب-نمایش-تاریخ-و-تغییر-سایز-خودکار-فیلد" class="anchor" href="#%D8%AA%D8%BA%DB%8C%DB%8C%D8%B1-%D9%82%D8%A7%D9%84%D8%A8-%D9%86%D9%85%D8%A7%DB%8C%D8%B4-%D8%AA%D8%A7%D8%B1%DB%8C%D8%AE-%D9%88-%D8%AA%D8%BA%DB%8C%DB%8C%D8%B1-%D8%B3%D8%A7%DB%8C%D8%B2-%D8%AE%D9%88%D8%AF%DA%A9%D8%A7%D8%B1-%D9%81%DB%8C%D9%84%D8%AF" aria-hidden="true"><span class="octicon octicon-link"></span></a>تغییر قالب نمایش تاریخ و تغییر سایز خودکار فیلد</h3>
+
+<pre><code>        $("#datepicker4").datepicker({
+            dateFormat: './dd/mm/yy.html',
+            autoSize: true
+        });
+        $("#selector").change(function() {
+            $('#datepicker4').datepicker('option', { dateFormat: $(this).val() });
+        });
+</code></pre>
+
+<h3>
+<a id="استفاده-از-dropdown" class="anchor" href="#%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D9%87-%D8%A7%D8%B2-dropdown" aria-hidden="true"><span class="octicon octicon-link"></span></a>استفاده از dropdown</h3>
+
+<pre><code>        $('#datepicker5').datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+</code></pre>
+
+<h3>
+<a id="انتخاب-با-کلیک-بر-روی-عکس" class="anchor" href="#%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8-%D8%A8%D8%A7-%DA%A9%D9%84%DB%8C%DA%A9-%D8%A8%D8%B1-%D8%B1%D9%88%DB%8C-%D8%B9%DA%A9%D8%B3" aria-hidden="true"><span class="octicon octicon-link"></span></a>انتخاب با کلیک بر روی عکس</h3>
+
+<pre><code>        $("#datepicker6").datepicker({
+            showOn: 'button',
+            buttonImage: './styles/images/calendar.png',
+            buttonImageOnly: true
+        });
+</code></pre>
+
+<h3>
+<a id="نمایش-inline" class="anchor" href="#%D9%86%D9%85%D8%A7%DB%8C%D8%B4-inline" aria-hidden="true"><span class="octicon octicon-link"></span></a>نمایش inline</h3>
+
+<pre><code>        $('#datepicker7').datepicker();
+</code></pre>
+
+<h3>
+<a id="نمایش-چند-ماه" class="anchor" href="#%D9%86%D9%85%D8%A7%DB%8C%D8%B4-%DA%86%D9%86%D8%AF-%D9%85%D8%A7%D9%87" aria-hidden="true"><span class="octicon octicon-link"></span></a>نمایش چند ماه</h3>
+
+<pre><code>        $('#datepicker8').datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+</code></pre>
+
+<h3>
+<a id="غیرفعال-کردن-روزها" class="anchor" href="#%D8%BA%DB%8C%D8%B1%D9%81%D8%B9%D8%A7%D9%84-%DA%A9%D8%B1%D8%AF%D9%86-%D8%B1%D9%88%D8%B2%D9%87%D8%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>غیرفعال کردن روزها</h3>
+
+<pre><code>        $('#datepicker9').datepicker({
+            beforeShowDay: function(date) {
+                if (date.getDay() == 5)
+                    return [false, '', 'تعطیلات آخر هفته'];
+                return [true];
+            }
+        });
+</code></pre>
+
+<h3>
+<a id="تاریخ-پیشفرض" class="anchor" href="#%D8%AA%D8%A7%D8%B1%DB%8C%D8%AE-%D9%BE%DB%8C%D8%B4%D9%81%D8%B1%D8%B6" aria-hidden="true"><span class="octicon octicon-link"></span></a>تاریخ پیشفرض</h3>
+
+<pre><code>        $('#datepicker10').datepicker({
+            defaultDate: new JalaliDate(1361, 4, 10)    //this means "./1361/05/10.html"
+        });
+</code></pre>
+
+<h3>
+<a id="تنظیم-حداقل-و-حداکثر" class="anchor" href="#%D8%AA%D9%86%D8%B8%DB%8C%D9%85-%D8%AD%D8%AF%D8%A7%D9%82%D9%84-%D9%88-%D8%AD%D8%AF%D8%A7%DA%A9%D8%AB%D8%B1" aria-hidden="true"><span class="octicon octicon-link"></span></a>تنظیم حداقل و حداکثر</h3>
+
+<pre><code>        $('#datepicker11').datepicker({
+            minDate: '-3d',
+            maxDate: '+1w +2d'
+        });
+</code></pre>
+
+<h3>
+<a id="تنظیم-حداقل-بصورت-پویا" class="anchor" href="#%D8%AA%D9%86%D8%B8%DB%8C%D9%85-%D8%AD%D8%AF%D8%A7%D9%82%D9%84-%D8%A8%D8%B5%D9%88%D8%B1%D8%AA-%D9%BE%D9%88%DB%8C%D8%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>تنظیم حداقل بصورت پویا</h3>
+
+<pre><code>        $('#datepicker12from').datepicker({
+            onSelect: function(dateText, inst) {
+                $('#datepicker12to').datepicker('option', 'minDate', new JalaliDate(inst['selectedYear'], inst['selectedMonth'], inst['selectedDay']));
+            }
+        });
+
+        $('#datepicker12to').datepicker();
+</code></pre>
+
+<h3>
+<a id="استفاده-همزمان-از-تقویم-میلادی" class="anchor" href="#%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D9%87-%D9%87%D9%85%D8%B2%D9%85%D8%A7%D9%86-%D8%A7%D8%B2-%D8%AA%D9%82%D9%88%DB%8C%D9%85-%D9%85%DB%8C%D9%84%D8%A7%D8%AF%DB%8C" aria-hidden="true"><span class="octicon octicon-link"></span></a>استفاده همزمان از تقویم میلادی</h3>
+
+<pre><code>        $('#datepicker13').datepicker({
+            regional: ''
+        });
+</code></pre>
+
+<h3>
+<a id="استفاده-همزمان-از-تقویم-هجری-قمری" class="anchor" href="#%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D9%87-%D9%87%D9%85%D8%B2%D9%85%D8%A7%D9%86-%D8%A7%D8%B2-%D8%AA%D9%82%D9%88%DB%8C%D9%85-%D9%87%D8%AC%D8%B1%DB%8C-%D9%82%D9%85%D8%B1%DB%8C" aria-hidden="true"><span class="octicon octicon-link"></span></a>استفاده همزمان از تقویم هجری قمری</h3>
+
+<pre><code>        $('#datepicker14').datepicker({
+            regional: 'ar'
+        });
+</code></pre>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<p>Having trouble with calendar? <a href="https://github.com/saeedsalehi1/Persian-DatePicker/pulls">Pull Request</a> and we’ll help you sort it out.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/saeedsalehi1/Persian-DatePicker">Persian-datepicker</a> is maintained by <a href="https://github.com/saeedsalehi1">saeedsalehi1</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
