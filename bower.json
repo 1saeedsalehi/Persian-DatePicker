@@ -8,7 +8,6 @@
         "**/*.txt"
     ],
     "dependencies": {
-        "jquery": ">=1.6",
-        "persian-date": ">=0.1.8"
+        "jquery": ">=1.6"
     }
 }
