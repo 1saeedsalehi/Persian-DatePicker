@@ -1,0 +1,13 @@
+
+{
+    "name": "bs-persian-datepicker",
+    "version": "0.1.2",
+    "main": "dist/",
+    "ignore": [
+        ".jshintrc",
+        "**/*.txt"
+    ],
+    "dependencies": {
+        "jquery": ">=1.6"
+    }
+}
